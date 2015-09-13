@@ -1,0 +1,20 @@
+<h2><%= @channel.name %></h2>
+
+<div id='messages'>
+  <%= for message <- @channel.messages do %>
+    <a name='<%= message.id %>'></a>
+    <div class='message <%= message.type %>'>
+      <% # This is ugly, which means there is 100% a better way to do it %>
+      <a href='#<%= message.id %>'>
+        [<%= message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
+      </a>
+      <%= message.person.nick %>: <%= message.text %><br>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  if (document.location.hash) {
+    $(document.location.hash).highlight()
+  }
+</script>

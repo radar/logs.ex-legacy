@@ -1,0 +1,27 @@
+#messages {
+  font-size: 13pt;
+  line-height: 150%;
+}
+
+.message {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.kick {
+  color: #aa0000;
+  font-weight: bold;
+}
+
+.mode, .join, .part, .quit {
+  color: #afafaf;
+
+  a {
+    color: mix(#0033ff, #afafaf);
+  }
+}
+
+.highlight {
+  background: #ffffaa;
+}
+

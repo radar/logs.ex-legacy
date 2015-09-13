@@ -1,4 +1,4 @@
-import $ from "bower_components/jquery";
+import $ from "bower_components/jquery/dist/jquery";
 
 $.fn.highlight = function() {
   $('.highlight').removeClass("highlight");

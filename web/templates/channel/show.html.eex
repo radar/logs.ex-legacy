@@ -1,20 +1,28 @@
-<h2><%= @channel.name %></h2>
+<h2>#<%= @channel.name %> - <%= @date |> Calendar.Strftime.strftime!("%d %B %Y") %></h2>
+
+<p>
+  <label for='show_events'>
+    <input id='show_events' type='checkbox'> Show joins + parts
+  </label>
+</p>
+
+<% { :ok, yesterday } = @date |> Calendar.Date.advance(-1) %>
+<% yesterday = yesterday |> Calendar.Strftime.strftime!("%Y-%m-%d") %>
+<a href='<%= channel_path(@conn, :show, @channel.name, date: yesterday) %>'>Back 1 day</a>
+
+<% { :ok, tomorrow } = @date |> Calendar.Date.advance(1) %>
+<% tomorrow = tomorrow |> Calendar.Strftime.strftime!("%Y-%m-%d") %>
+<a href='<%= channel_path(@conn, :show, @channel.name, date: tomorrow) %>'>Forward 1 day</a>
 
 <div id='messages'>
-  <%= for message <- @channel.messages do %>
+  <%= for message <- @messages do %>
     <a name='<%= message.id %>'></a>
     <div class='message <%= message.type %>'>
-      <% # This is ugly, which means there is 100% a better way to do it %>
       <a href='#<%= message.id %>'>
         [<%= message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
       </a>
-      <%= message.person.nick %>: <%= message.text %><br>
+      <a href='/p/<%= message.person.nick %>'><%= message.person.nick %></a>:
+      <%= message.text %><br>
     </div>
   <% end %>
 </div>
-
-<script>
-  if (document.location.hash) {
-    $(document.location.hash).highlight()
-  }
-</script>

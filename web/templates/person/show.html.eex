@@ -1,0 +1,26 @@
+<h2><%= @person.nick %></h2>
+
+<a href='/p/<%= @person.nick %>/activity'>Activity Graph</a>
+
+<p>
+  <label for='show_events'>
+    <input id='show_events' type='checkbox'> Show joins + parts
+  </label>
+</p>
+
+<div id='messages'>
+  <% message_groups = Enum.group_by(@messages, (fn (message) -> message.created_at |> Calendar.Strftime.strftime!("%Y-%m-%d") end)) %>
+  <%= for { date, messages } <- message_groups do %>
+    <h3><%= date %></h3>
+    <%= for message <- Enum.sort_by(messages, fn(m) -> m.created_at end) do %>
+      <a name='<%= message.id %>'></a>
+      <div class='message <%= message.type %>'>
+        <a href='#<%= message.id %>'>
+          [<%= message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
+        </a>
+        <a href='/p/<%= @person.nick %>'><%= @person.nick %></a>:
+        <%= message.text %><br>
+      </div>
+    <% end %>
+  <% end %>
+</div>

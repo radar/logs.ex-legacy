@@ -16,11 +16,9 @@ defmodule Logs.Router do
   scope "/", Logs do
     pipe_through :browser # Use the default browser stack
     get "/", ChannelController, :index
-    resources "channels", ChannelController
-  end
+    get "/:name", ChannelController, :show
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Logs do
-  #   pipe_through :api
-  # end
+    get "/p/:nick", PersonController, :show
+    get "/p/:nick/activity", PersonController, :activity
+  end
 end

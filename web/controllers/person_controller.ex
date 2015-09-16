@@ -28,12 +28,8 @@ defmodule Logs.PersonController do
       select: max(m.created_at)
     { { most_recent_year, _, _ }, _ } = query |> Repo.one
 
-    # TODO: is there a way to use the same connection as Ecto does?
-    {:ok, pid} = Postgrex.Connection.start_link(hostname: "localhost", database: "railsbot")
-    result = Postgrex.Connection.query!(pid, "SELECT COUNT(*) as count, created_at::DATE as date FROM messages WHERE person_id = 9 GROUP BY created_at::DATE ORDER BY date DESC", [])
     render conn, "activity.html", 
-      person: person, 
-      activity: result.rows,
+      person: person,
       oldest_year: oldest_year,
       most_recent_year: most_recent_year
   end

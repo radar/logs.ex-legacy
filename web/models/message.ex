@@ -8,6 +8,5 @@ defmodule Logs.Message do
     belongs_to :channel, Logs.Channel
     field :hidden, :boolean
     field :created_at, Ecto.DateTime
-    field :updated_at, Ecto.DateTime
   end
 end

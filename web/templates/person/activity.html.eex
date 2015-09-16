@@ -38,25 +38,19 @@ var rect = svg.selectAll(".day")
     .attr("y", function(d) { return day(d) * cellSize; })
     .datum(format);
 
-d3.json("/p/<%= @person.nick %>/activity.json", function(error, json) {
+d3.json("/api/p/<%= @person.nick %>/activity?_format=json", function(error, json) {
   var data = d3.nest()
     .key(function(d) { return d.date; })
     .rollup(function(d) { return d[0].count; })
     .map(json);
 
   rect.filter(function(d) { return d in data; })
-      .attr("class", function(d) { return "day " + color(data[d]); })
+    .attr("class", function(d) { return "day " + color(data[d]); })
     .attr("title", function(d) { return data[d] + " messages on " + d })
     .select("title")
-      .text(function(d) { return data[d] });
+    .text(function(d) { return data[d] });
 });
 
 d3.select(self.frameElement).style("height", "500px");
-
-$('.day').tipsy({ 
-  gravity: 'se',
-  offset: 1,
-  fallback: "0 messages"
-});
 
 </script>

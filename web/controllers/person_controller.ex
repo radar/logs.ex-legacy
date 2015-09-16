@@ -9,6 +9,7 @@ defmodule Logs.PersonController do
     person = Repo.get_by(Person, nick: params["nick"])
     messages = from m in Message,
       where: m.person_id == ^person.id,
+      where: m.hidden == false,
       order_by: [desc: m.created_at]
 
     messages = messages |> Repo.all

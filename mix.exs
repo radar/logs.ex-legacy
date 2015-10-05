@@ -36,7 +36,8 @@ defmodule Logs.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:calecto, "~> 0.3.10"},
-     {:timex, "~> 0.19.4"}
+     {:timex, "~> 0.19.4"},
+     {:scrivener, "~> 1.0"}
    ]
   end
 end

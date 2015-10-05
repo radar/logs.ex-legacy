@@ -10,9 +10,12 @@ defmodule Logs.Router do
   end
 
   pipeline :api do
-    scope "/api", Logs do
-      get "/p/:nick/activity", API.PersonController, :activity
-    end
+    plug :accepts, ["json"]
+  end
+
+  scope "/api", Logs do
+    pipe_through :api
+    get "/p/:nick/activity", API.PersonController, :activity
   end
 
   scope "/", Logs do

@@ -13,7 +13,7 @@ defmodule Logs.PersonController do
     |> where([m], m.person_id == ^person.id)
     |> where([m], m.hidden == false)
     |> order_by([m], desc: m.created_at)
-    |> Repo.paginate(page: params["page"])
+    |> Repo.paginate(page: params["page"], page_size: 250)
 
     render conn, "show.html",
       person: person, messages: page.entries,

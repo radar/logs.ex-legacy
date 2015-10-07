@@ -9,13 +9,13 @@
 </p>
 <p>
   <%= if @page_number > 1 do %>
-  <a href="<%= person_path @conn, :show, "gadavid" %>/<%= @page_number-1 %>">&laquo; Prev</a>
+  <a href="<%= person_path @conn, :show, @person.nick %>/<%= @page_number-1 %>">&laquo; Prev</a>
   |
   <% end %>
   Page <%= @page_number %> of <%= @total_pages %>
   <%= if @page_number < @total_pages do %>
   |
-  <a href="<%= person_path @conn, :show, "gadavid" %>/<%= @page_number+1 %>"> Next &raquo;</a>
+  <a href="<%= person_path @conn, :show, @person.nick %>/<%= @page_number+1 %>"> Next &raquo;</a>
   <% end %>
 <div id='messages'>
   <% message_groups = Enum.group_by(@messages, (fn (message) -> message.created_at |> Calendar.Strftime.strftime!("%Y-%m-%d") end)) %>

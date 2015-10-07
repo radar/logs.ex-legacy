@@ -6,14 +6,19 @@ defmodule Logs.PersonController do
   import Ecto.Query
 
   def show(conn, params) do
-    person = Repo.get_by(Person, nick: params["nick"])
-    messages = from m in Message,
-      where: m.person_id == ^person.id,
-      where: m.hidden == false,
-      order_by: [desc: m.created_at]
 
-    messages = messages |> Repo.all
-    render conn, "show.html", person: person, messages: messages
+    person = Repo.get_by(Person, nick: params["nick"])
+
+    page = Message
+    |> where([m], m.person_id == ^person.id)
+    |> where([m], m.hidden == false)
+    |> order_by([m], desc: m.created_at)
+    |> Repo.paginate(page: params["page"])
+
+    render conn, "show.html",
+      person: person, messages: page.entries,
+      page_number: page.page_number, total_pages: page.total_pages
+
   end
 
   def activity(conn, params) do
@@ -29,7 +34,7 @@ defmodule Logs.PersonController do
       select: max(m.created_at)
     { { most_recent_year, _, _ }, _ } = query |> Repo.one
 
-    render conn, "activity.html", 
+    render conn, "activity.html",
       person: person,
       oldest_year: oldest_year,
       most_recent_year: most_recent_year

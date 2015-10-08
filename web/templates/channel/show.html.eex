@@ -16,13 +16,6 @@
 
 <div id='messages'>
   <%= for message <- @messages do %>
-    <a name='<%= message.id %>'></a>
-    <div class='message <%= message.type %>'>
-      <a href='#<%= message.id %>'>
-        [<%= message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
-      </a>
-      <a href='/p/<%= message.person.nick %>'><%= message.person.nick %></a>:
-      <%= message.text %><br>
-    </div>
+    <%= render Logs.MessageView, "message.html", message: message, person: message.person %>
   <% end %>
 </div>

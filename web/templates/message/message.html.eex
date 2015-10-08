@@ -1,0 +1,8 @@
+<a name='<%= @message.id %>'></a>
+<div class='message <%= @message.type %>'>
+  <a href='#<%= @message.id %>'>
+    [<%= @message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
+  </a>
+  <a href='/p/<%= @person.nick %>'><%= @person.nick %></a>:
+  <%= @message.text %><br>
+</div>

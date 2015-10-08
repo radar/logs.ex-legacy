@@ -22,14 +22,7 @@
   <%= for { date, messages } <- message_groups do %>
     <h3><%= date %></h3>
     <%= for message <- Enum.sort_by(messages, fn(m) -> m.created_at end) do %>
-      <a name='<%= message.id %>'></a>
-      <div class='message <%= message.type %>'>
-        <a href='#<%= message.id %>'>
-          [<%= message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
-        </a>
-        <a href='/p/<%= @person.nick %>'><%= @person.nick %></a>:
-        <%= message.text %><br>
-      </div>
+      <%= render Logs.MessageView, "message.html", message: message, person: @person %>
     <% end %>
   <% end %>
 </div>

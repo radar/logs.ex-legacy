@@ -24,7 +24,6 @@ defmodule Logs.Router do
     get "/:name", ChannelController, :show
 
     get "/p/:nick", PersonController, :show
-    get "/p/:nick/:page", PersonController, :show
     get "/p/:nick/activity", PersonController, :activity
   end
 end

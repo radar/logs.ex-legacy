@@ -22,4 +22,12 @@ $(document).ready(function() {
       $('.join, .part').hide();
     }
   });
+
+
+  $('.day').tipsy({ 
+    gravity: 'se',
+    offset: 1,
+    fallback: "0 messages"
+  });
+
 })

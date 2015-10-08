@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Phoenix!</title>
+    <title>Logs</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

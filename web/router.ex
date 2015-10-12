@@ -20,6 +20,8 @@ defmodule Logs.Router do
 
   scope "/", Logs do
     pipe_through :browser # Use the default browser stack
+    get "/tips", TipController, :index
+    
     get "/", ChannelController, :index
     get "/:name", ChannelController, :show
 

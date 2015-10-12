@@ -1,0 +1,7 @@
+<h1>Showing all <%= Enum.count(@tips) %> tips</h1>
+
+<ul>
+  <%= for tip <- @tips do %>
+    <li><strong><%= tip.command %></strong> <p><%= tip.text %></p></li>
+  <% end %>
+</ul>

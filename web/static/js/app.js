@@ -1,4 +1,5 @@
 import $ from "bower_components/jquery/dist/jquery";
+import "web/static/vendor/jquery.tipsy"
 
 $.fn.highlight = function() {
   $('.highlight').removeClass("highlight");
@@ -22,12 +23,10 @@ $(document).ready(function() {
       $('.join, .part').hide();
     }
   });
-
-
-  $('.day').tipsy({ 
-    gravity: 'se',
-    offset: 1,
-    fallback: "0 messages"
-  });
-
 })
+
+Logs = {
+  tell_me_something: function() {
+    console.log("YEAAHHHHH")
+  }
+}

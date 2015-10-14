@@ -52,7 +52,4 @@ d3.json("/api/p/<%= @person.nick %>/activity?_format=json", function(error, json
 });
 
 d3.select(self.frameElement).style("height", "500px");
-
-Logs.tell_me_something();
-
 </script>

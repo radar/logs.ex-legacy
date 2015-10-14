@@ -24,9 +24,3 @@ $(document).ready(function() {
     }
   });
 })
-
-Logs = {
-  tell_me_something: function() {
-    console.log("YEAAHHHHH")
-  }
-}

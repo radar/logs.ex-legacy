@@ -14,6 +14,7 @@ defmodule Logs.PersonController do
     |> where([m], m.hidden == false)
     |> order_by([m], desc: m.created_at)
     |> Repo.paginate(page: params["page"], page_size: 250)
+    |> Repo.preload(:channel)
 
     render conn, "show.html",
       person: person, messages: page.entries,

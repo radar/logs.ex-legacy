@@ -1,6 +1,7 @@
 <a name='<%= @message.id %>'></a>
 <div class='message <%= @message.type %>'>
-  <a href='#<%= @message.id %>'>
+  <% date = @message.created_at |> Calendar.Strftime.strftime!("%Y-%m-%d") %>
+  <a href='/<%= @message.channel.name %>?date=<%= date %>#<%= @message.id %>'>
     [<%= @message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
   </a>
   <a href='/p/<%= @person.nick %>'><%= @person.nick %></a>:

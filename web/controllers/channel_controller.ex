@@ -42,7 +42,7 @@ defmodule Logs.ChannelController do
 
     messages = query 
       |> Repo.all 
-      |> Repo.preload(:person)
+      |> Repo.preload([:person, :channel])
 
     { :ok, date } = Calendar.Date.from_erl(date)
 

@@ -37,8 +37,11 @@ defmodule Logs.Mixfile do
      {:cowboy, "~> 1.0"},
      {:calecto, "~> 0.3.10"},
      {:timex, "~> 0.19.4"},
-     {:scrivener, "~> 1.0"},
-     {:exrm, "~> 0.19.8"}
+     {:scrivener, "~> 1.1.0"},
+     {:exrm, "~> 0.19.8"},
+     {:exometer_core, github: "PSPDFKit-labs/exometer_core", override: true},
+     {:exometer, github: "PSPDFKit-labs/exometer"},
+     {:edown, github: "uwiger/edown", tag: "0.7", override: true},
    ]
   end
 end

@@ -1,8 +1,9 @@
 <a name='<%= @message.id %>'></a>
 <div class='message <%= @message.type %>'>
-  <a href='#<%= @message.id %>'>
+  <% date = @message.created_at |> Calendar.Strftime.strftime!("%Y-%m-%d") %>
+  <%= link to: channel_path(@conn, :show, @channel.name, date: date) <> "##{@message.id}" do %>
     [<%= @message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
-  </a>
+  <% end %>
   <a href='/p/<%= @person.nick %>'><%= @person.nick %></a>:
   <%= @message.text %><br>
 </div>

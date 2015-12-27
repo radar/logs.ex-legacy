@@ -22,9 +22,10 @@
 <div id='messages'>
   <% message_groups = Enum.group_by(@messages, (fn (message) -> message.created_at |> Calendar.Strftime.strftime!("%Y-%m-%d") end)) |> Enum.to_list |> Enum.sort_by(fn ({group, messages}) -> group end) |> Enum.reverse %>
   <%= for { date, messages } <- message_groups do %>
+    <% messages = messages |> Logs.Repo.preload(:channel) %>
     <h3><%= date %></h3>
     <%= for message <- Enum.sort_by(messages, fn(m) -> m.created_at end) do %>
-      <%= render Logs.MessageView, "message.html", message: message, person: @person %>
+      <%= render Logs.MessageView, "message.html", conn: @conn, message: message, person: @person, channel: message.channel %>
     <% end %>
   <% end %>
 </div>

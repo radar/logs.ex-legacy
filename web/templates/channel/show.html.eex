@@ -16,6 +16,6 @@
 
 <div id='messages'>
   <%= for message <- @messages do %>
-    <%= render Logs.MessageView, "message.html", message: message, person: message.person %>
+    <%= render Logs.MessageView, "message.html", conn: @conn, message: message, person: message.person, channel: @channel %>
   <% end %>
 </div>

@@ -6,9 +6,9 @@
   </label>
 </p>
 
-<a href='<%= channel_path(@conn, :show, @channel.name, date: pretty_date(yesterday(@date))) %>'>Back 1 day</a>
+<a href='<%= channel_path(@conn, :show, @channel.name, date: @date |> yesterday |> pretty_date) %>'>Back 1 day</a>
 
-<a href='<%= channel_path(@conn, :show, @channel.name, date: pretty_date(tomorrow(@date))) %>'>Forward 1 day</a>
+<a href='<%= channel_path(@conn, :show, @channel.name, date: @date |> tomorrow |> pretty_date) %>'>Forward 1 day</a>
 
 <div id='messages'>
   <%= for message <- @messages do %>

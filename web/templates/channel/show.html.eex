@@ -7,11 +7,11 @@
 </p>
 
 <% { :ok, yesterday } = @date |> Calendar.Date.advance(-1) %>
-<% yesterday = yesterday |> Calendar.Strftime.strftime!("%Y-%m-%d") %>
+<% yesterday = pretty_date(yesterday) %>
 <a href='<%= channel_path(@conn, :show, @channel.name, date: yesterday) %>'>Back 1 day</a>
 
 <% { :ok, tomorrow } = @date |> Calendar.Date.advance(1) %>
-<% tomorrow = tomorrow |> Calendar.Strftime.strftime!("%Y-%m-%d") %>
+<% tomorrow = pretty_date(tomorrow) %>
 <a href='<%= channel_path(@conn, :show, @channel.name, date: tomorrow) %>'>Forward 1 day</a>
 
 <div id='messages'>

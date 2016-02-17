@@ -24,10 +24,13 @@ defmodule Logs.PersonController do
     |> preload([:channel])
     |> Repo.paginate(page: params["page"], page_size: 250)
 
+    channel_ids = Enum.map(page.entries, fn (m) -> m.channel_id end)
+    channels = Channel |> where([c], c.id in ^channel_ids) |> Repo.all
+
     render conn, "show.html",
       person: person, messages: page.entries, channel: channel,
-      page_number: page.page_number, total_pages: page.total_pages
-
+      page_number: page.page_number, total_pages: page.total_pages,
+      channels: channels
   end
 
   def activity(conn, params) do

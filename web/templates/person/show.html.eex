@@ -7,11 +7,11 @@
 </h2>
 </span>
 
-<%= unless @channel do %>
-Channels:
-  <%= raw Enum.join(Enum.map(@messages, fn(x) ->  "<a href='?channel=#{URI.encode(x.channel.name)}'>##{x.channel.name}</a>" end), ", ") %>
+<%= if @channel do %>
+  <a href='/p/<%= @person.nick %>'>Remove channel scoping</a>
 <% else %>
-  <a href='/p/<%= @person.nick %>'>Go Back</a>
+  Channels:
+    <%= raw Enum.map(@channels, fn(c) ->  "<a href='?channel=#{URI.encode(c.name)}'>##{c.name}</a>" end) |> Enum.join(", ") %>
 <% end %>
 </br>
 

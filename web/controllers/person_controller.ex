@@ -1,6 +1,7 @@
 defmodule Logs.PersonController do
   use Logs.Web, :controller
   alias Logs.Person
+  alias Logs.Channel
   alias Logs.Message
   alias Logs.Repo
   import Ecto.Query
@@ -12,13 +13,24 @@ defmodule Logs.PersonController do
     page = Message
     |> where([m], m.person_id == ^person.id)
     |> where([m], m.hidden == false)
-    |> order_by([m], desc: m.created_at)
+
+    if params["channel"] do
+      channel = Repo.get_by(Channel, name: params["channel"], hidden: false)
+
+      page = page |> where([m], m.channel_id == ^channel.id)
+    end
+
+    page = page |> order_by([m], desc: m.created_at)
+    |> preload([:channel])
     |> Repo.paginate(page: params["page"], page_size: 250)
 
-    render conn, "show.html",
-      person: person, messages: page.entries,
-      page_number: page.page_number, total_pages: page.total_pages
+    channel_ids = Enum.map(page.entries, fn (m) -> m.channel_id end)
+    channels = Channel |> where([c], c.id in ^channel_ids) |> Repo.all
 
+    render conn, "show.html",
+      person: person, messages: page.entries, channel: channel,
+      page_number: page.page_number, total_pages: page.total_pages,
+      channels: channels
   end
 
   def activity(conn, params) do

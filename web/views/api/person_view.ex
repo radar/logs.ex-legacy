@@ -3,8 +3,7 @@ defmodule Logs.API.PersonView do
 
   def render("activity.json", %{activity: activity}) do
     Enum.map(activity, fn([count, {year, month, day}]) ->
-      date = Timex.Date.from({year, month, day})
-      { :ok, date_str } = Timex.DateFormat.format(date, "%Y-%m-%d", :strftime)
+      date_str = {year, month, day} |> Calendar.Date.Format.iso8601
       %{count: count, date: date_str }
     end)
   end

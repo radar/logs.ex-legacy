@@ -30,6 +30,7 @@ defmodule Logs.Web do
       alias Logs.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
+      use Calendar
 
       import Logs.Router.Helpers
     end

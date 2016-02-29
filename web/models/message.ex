@@ -7,6 +7,6 @@ defmodule Logs.Message do
     belongs_to :person, Logs.Person
     belongs_to :channel, Logs.Channel
     field :hidden, :boolean
-    field :created_at, Ecto.DateTime
+    field :created_at, Calecto.DateTimeUTC
   end
 end

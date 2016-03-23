@@ -2,6 +2,6 @@
 
 <ul>
   <%= for [count, person] <- @messages do %>
-    <li><%= person %>: <%= count %></li>
+    <li><strong><%= person %></strong>: <%= count %></li>
   <% end %>
 </ul>

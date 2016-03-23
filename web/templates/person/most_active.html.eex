@@ -1,0 +1,7 @@
+<h1>25 most talkative people</h1>
+
+<ul>
+  <%= for [count, person] <- @messages do %>
+    <li><%= person %>: <%= count %></li>
+  <% end %>
+</ul>

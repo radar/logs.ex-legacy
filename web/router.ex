@@ -27,5 +27,6 @@ defmodule Logs.Router do
 
     get "/p/:nick", PersonController, :show
     get "/p/:nick/activity", PersonController, :activity
+    get "/p/stats/most_active", PersonController, :most_active
   end
 end

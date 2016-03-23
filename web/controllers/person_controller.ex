@@ -6,6 +6,21 @@ defmodule Logs.PersonController do
   alias Logs.Repo
   import Ecto.Query
 
+  def most_active(conn, _params) do
+    messages = from message in Message,
+    join: person in assoc(message, :person),
+    group_by: person.nick,
+    select: [count(message.id), person.nick],
+    order_by: [desc: count(message.id)],
+    limit: 25
+    
+    messages = messages |> Repo.all
+
+    render conn, "most_active.html", messages: messages
+
+
+  end
+
   def show(conn, params) do
 
     person = Repo.get_by(Person, nick: params["nick"])

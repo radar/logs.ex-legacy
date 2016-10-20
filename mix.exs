@@ -29,15 +29,15 @@ defmodule Logs.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:postgrex, "0.11.1"},
-     {:phoenix_html, "~> 2.1"},
+    [{:phoenix, "~> 1.2.1"},
+     {:phoenix_ecto, "~> 3.0.1"},
+     {:postgrex, "0.12.1"},
+     {:phoenix_html, "~> 2.7"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:calecto, "~> 0.5.1"},
-     {:scrivener, "~> 1.1.2"},
-     {:exrm, "~> 0.19.8"}
+     {:calecto, "~> 0.16.0"},
+     {:scrivener, "~> 2.1.1"},
+     {:scrivener_ecto, "~> 1.0.2"},
    ]
   end
 end

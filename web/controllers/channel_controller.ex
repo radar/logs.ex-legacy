@@ -7,9 +7,7 @@ defmodule Logs.ChannelController do
   import Ecto.Query
 
   def index(conn, _params) do
-    channels = Channel
-      |> where([c], c.hidden == false)
-      |> Repo.all
+    channels = Channel |> where(hidden: false) |> Repo.all
     render conn, "index.html", channels: channels
   end
 

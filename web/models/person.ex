@@ -1,5 +1,5 @@
 defmodule Logs.Person do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "people" do
     field :nick

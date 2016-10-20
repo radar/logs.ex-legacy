@@ -1,5 +1,5 @@
 defmodule Logs.Channel do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "channels" do
     field :name

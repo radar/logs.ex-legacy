@@ -18,7 +18,7 @@ defmodule Logs.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
       use Calecto.Model, usec: true
     end
   end
@@ -30,7 +30,6 @@ defmodule Logs.Web do
       alias Logs.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
-      use Calendar
 
       import Logs.Router.Helpers
     end

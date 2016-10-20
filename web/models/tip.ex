@@ -1,5 +1,5 @@
 defmodule Logs.Tip do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "tips" do
     field :command

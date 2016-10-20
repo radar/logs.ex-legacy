@@ -1,5 +1,5 @@
 defmodule Logs.Message do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "messages" do
     field :text

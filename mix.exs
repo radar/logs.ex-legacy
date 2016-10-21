@@ -17,8 +17,8 @@ defmodule Logs.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Logs, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :scrivener, :calendar, :calecto]]
+     applications: [:phoenix, :phoenix_html, :phoenix_pubsub, :cowboy, :logger,
+                    :phoenix_ecto, :postgrex, :scrivener, :scrivener_ecto, :calendar, :calecto]]
   end
 
   # Specifies which paths to compile per environment

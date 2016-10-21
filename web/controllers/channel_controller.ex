@@ -1,7 +1,6 @@
 defmodule Logs.ChannelController do
   use Logs.Web, :controller
   alias Logs.Channel
-  alias Logs.Person
   alias Logs.Message
   alias Logs.Repo
   import Ecto.Query
@@ -16,18 +15,18 @@ defmodule Logs.ChannelController do
 
     date = case params["date"] do
       nil ->
-        DateTime.now!("Etc/UTC") |> DateTime.to_date
+        DateTime.utc_now |> DateTime.to_date
       date_from_params ->
-        date_from_params |> Date.Parse.iso8601!
+        date_from_params |> Date.from_iso8601!
     end
-    next_day = date |> Date.advance!(1)
-    start_time = DateTime.from_date_and_time_and_zone!(date,     {0, 0, 0}, "Etc/UTC")
-    end_time   = DateTime.from_date_and_time_and_zone!(next_day, {0, 0, 0}, "Etc/UTC")
+
+    start_of_next_day = date |> Calendar.Date.advance!(1) |> Ecto.Date.cast! |> Ecto.DateTime.from_date
+    start_of_day = date |> Ecto.Date.cast! |> Ecto.DateTime.from_date
 
     query = from m in Message,
       where: m.channel_id == ^channel.id and
-        m.created_at >= ^start_time and
-        m.created_at <  ^end_time,
+        m.created_at >= ^start_of_day and
+        m.created_at <  ^start_of_next_day,
       order_by: m.created_at
 
     messages = query

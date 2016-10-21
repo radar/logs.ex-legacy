@@ -1,5 +1,5 @@
-import $ from "bower_components/jquery/dist/jquery";
-import "web/static/vendor/jquery.tipsy"
+require("./../css/app.css");
+var $ = require('jquery');
 
 $.fn.highlight = function() {
   $('.highlight').removeClass("highlight");

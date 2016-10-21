@@ -17,8 +17,6 @@ defmodule Logs.PersonController do
     messages = messages |> Repo.all
 
     render conn, "most_active.html", messages: messages
-
-
   end
 
   def show(conn, params) do
@@ -28,10 +26,13 @@ defmodule Logs.PersonController do
       |> where(person_id: ^person.id)
       |> where(hidden: false)
 
-    if params["channel"] do
-      channel = Repo.get_by(Channel, name: params["channel"], hidden: false)
-
-      page = page |> where(channel_id: ^channel.id)
+    {channel, page} = case params["channel"] do
+      nil ->
+        {nil, page}
+      channel_name ->
+        channel = Repo.get_by(Channel, name: channel_name, hidden: false)
+        page = page |> where(channel_id: ^channel.id)
+        {channel, page}
     end
 
     page = page |> order_by(desc: :created_at)

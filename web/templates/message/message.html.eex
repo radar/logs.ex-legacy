@@ -1,6 +1,6 @@
 <a name='<%= @message.id %>'></a>
 <div class='message <%= @message.type %>'>
-  <% date = @message.created_at |> Calendar.Date.Format.iso8601 %>
+  <% date = @message.created_at |> Ecto.DateTime.to_date |> Ecto.Date.to_iso8601 %>
   <%= link to: channel_path(@conn, :show, @channel.name, date: date) <> "##{@message.id}" do %>
     [<%= @message.created_at |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
   <% end %>

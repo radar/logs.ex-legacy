@@ -21,7 +21,6 @@ defmodule Logs.ConnCase do
       use Phoenix.ConnTest
 
       alias Logs.Repo
-      import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       import Logs.Router.Helpers

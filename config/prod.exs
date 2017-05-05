@@ -14,7 +14,6 @@ use Mix.Config
 config :logs, Logs.Endpoint,
   http: [port: 8001],
   url: [host: "localhost", port: 8001],
-  cache_static_manifest: "priv/static/manifest.json",
   server: true
 
 # Do not print debug messages in production

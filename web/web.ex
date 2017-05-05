@@ -19,17 +19,12 @@ defmodule Logs.Web do
   def model do
     quote do
       use Ecto.Schema
-      use Calecto.Model, usec: true
     end
   end
 
   def controller do
     quote do
       use Phoenix.Controller
-
-      alias Logs.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 1, from: 2]
 
       import Logs.Router.Helpers
     end

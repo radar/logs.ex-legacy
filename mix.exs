@@ -4,7 +4,7 @@ defmodule Logs.Mixfile do
   def project do
     [app: :logs,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -30,16 +30,17 @@ defmodule Logs.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, "~> 1.2.1"},
-     {:phoenix_ecto, "~> 3.0.1"},
-     {:postgrex, "0.12.1"},
+     {:phoenix_ecto, "~> 3.2.2"},
+     {:postgrex, "~> 0.13"},
      {:phoenix_html, "~> 2.7"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:scrivener, "~> 2.1.1"},
-     {:scrivener_ecto, "~> 1.0.2"},
-     {:calendar, "~> 0.16.1"},
+     {:scrivener_ecto, "~> 1.1.3"},
+     {:calendar, "~> 0.17.2"},
      {:calecto, "~> 0.16.0"},
      {:distillery, "~> 0.10"},
+     {:edeliver, "~> 1.4.0"},
    ]
   end
 end

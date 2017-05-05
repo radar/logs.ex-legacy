@@ -1,37 +1,26 @@
 defmodule Logs.ChannelController do
   use Logs.Web, :controller
+
   alias Logs.Channel
   alias Logs.Message
-  alias Logs.Repo
-  import Ecto.Query
 
   def index(conn, _params) do
-    channels = Channel |> where(hidden: false) |> Repo.all
-    render conn, "index.html", channels: channels
+    render conn, "index.html", channels: Channel.visible_channels
   end
 
-  def show(conn, params) do
-    channel = Repo.get_by(Channel, name: params["name"], hidden: false)
+  def show(conn, %{"name" => name, "date" => date}) do
+    conn
+    |> show_messages(Channel.by_name(name), date |> Date.from_iso8601!)
+  end
 
-    date = case params["date"] do
-      nil ->
-        DateTime.utc_now |> DateTime.to_date
-      date_from_params ->
-        date_from_params |> Date.from_iso8601!
-    end
+  def show(conn, %{"name" => name}) do
+    channel = Channel.by_name(name)
+    date = DateTime.utc_now |> DateTime.to_date
+    conn |> show_messages(channel, date)
+  end
 
-    start_of_next_day = date |> Calendar.Date.advance!(1) |> Ecto.Date.cast! |> Ecto.DateTime.from_date
-    start_of_day = date |> Ecto.Date.cast! |> Ecto.DateTime.from_date
-
-    query = from m in Message,
-      where: m.channel_id == ^channel.id and
-        m.created_at >= ^start_of_day and
-        m.created_at <  ^start_of_next_day,
-      order_by: m.created_at
-
-    messages = query
-      |> Repo.all
-      |> Repo.preload(:person)
+  defp show_messages(conn, channel, date) do
+    messages = Message.by_channel_and_date(channel.id, date)
 
     render conn, "show.html", channel: channel, messages: messages, date: date
   end

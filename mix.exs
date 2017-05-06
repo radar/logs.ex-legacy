@@ -18,7 +18,7 @@ defmodule Logs.Mixfile do
   def application do
     [mod: {Logs, []},
      applications: [:phoenix, :phoenix_html, :phoenix_pubsub, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :scrivener, :scrivener_ecto, :calendar, :calecto]]
+                    :phoenix_ecto, :postgrex, :scrivener, :scrivener_ecto, :calendar]]
   end
 
   # Specifies which paths to compile per environment
@@ -38,7 +38,6 @@ defmodule Logs.Mixfile do
      {:scrivener, "~> 2.1.1"},
      {:scrivener_ecto, "~> 1.1.3"},
      {:calendar, "~> 0.17.2"},
-     {:calecto, "~> 0.16.0"},
      {:distillery, "~> 0.10"},
      {:edeliver, "~> 1.4.0"},
    ]

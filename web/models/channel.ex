@@ -13,7 +13,7 @@ defmodule Logs.Channel do
   end
 
   def visible_channels do
-    visible() |> Repo.all
+    visible() |> order_by(asc: :name) |> Repo.all
   end
 
   def by_name(name) do

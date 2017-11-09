@@ -10,17 +10,18 @@ defmodule Logs.Message do
     belongs_to :person, Logs.Person
     belongs_to :channel, Logs.Channel
     field :hidden, :boolean
-    field :created_at, Ecto.DateTime
+    field :created_at, :naive_datetime
   end
 
   def by_channel_and_date(channel_id, date) do
-    start_of_next_day = date |> Calendar.Date.advance!(1) |> Ecto.Date.cast! |> Ecto.DateTime.from_date
-    start_of_day = date |> Ecto.Date.cast! |> Ecto.DateTime.from_date
+    {:ok, time} = Time.new(0, 0, 0)
+    {:ok, until} = date |> Calendar.Date.advance!(1) |> NaiveDateTime.new(time)
+    {:ok, from} = NaiveDateTime.new(date, time)
 
     query = from m in Message,
       where: m.channel_id == ^channel_id and
-        m.created_at >= ^start_of_day and
-        m.created_at <  ^start_of_next_day,
+        m.created_at >= ^from and
+        m.created_at <  ^until,
       order_by: m.created_at
 
     query

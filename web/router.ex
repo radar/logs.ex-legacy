@@ -1,3 +1,4 @@
+
 defmodule Logs.Router do
   use Logs.Web, :router
 
@@ -13,15 +14,22 @@ defmodule Logs.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", Logs do
+  forward "/graphql", Absinthe.Plug, schema: Logs.Schema
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Logs.Schema,
+    interface: :simple
+
+  scope "/api" do
     pipe_through :api
-    get "/p/:nick/activity", API.PersonController, :activity
+    get "/p/:nick/activity", Logs.API.PersonController, :activity
+
   end
 
   scope "/", Logs do
     pipe_through :browser # Use the default browser stack
     get "/tips", TipController, :index
-    
+
     get "/", ChannelController, :index
     get "/:name", ChannelController, :show
 

@@ -35,5 +35,7 @@ defmodule Logs.Endpoint do
     key: "_logs_key",
     signing_salt: "7JyfAiY6"
 
+  plug Corsica, log: [accepted: :info, rejected: :info], allow_headers: ["content-type"]
+
   plug Logs.Router
 end

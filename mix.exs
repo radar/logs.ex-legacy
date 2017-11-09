@@ -9,7 +9,7 @@ defmodule Logs.Mixfile do
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application
@@ -17,8 +17,7 @@ defmodule Logs.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Logs, []},
-     applications: [:phoenix, :phoenix_html, :phoenix_pubsub, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :scrivener, :scrivener_ecto, :calendar]]
+      extra_applications: [:logger]]
   end
 
   # Specifies which paths to compile per environment
@@ -29,8 +28,9 @@ defmodule Logs.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 1.2.1"},
-     {:phoenix_ecto, "~> 3.2.2"},
+    [{:phoenix, "~> 1.3.0"},
+     {:phoenix_ecto, "~> 3.3.0"},
+     {:corsica, "~> 1.0"},
      {:postgrex, "~> 0.13"},
      {:phoenix_html, "~> 2.7"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
@@ -38,6 +38,8 @@ defmodule Logs.Mixfile do
      {:scrivener, "~> 2.1.1"},
      {:scrivener_ecto, "~> 1.1.3"},
      {:calendar, "~> 0.17.2"},
+     {:absinthe, "~> 1.3.0"},
+     {:absinthe_plug, "~> 1.3.0"},
      {:distillery, "~> 0.10"},
      {:edeliver, "~> 1.4.0"},
    ]

@@ -6,16 +6,12 @@ defmodule Logs.Schema.Types do
     field :messages, list_of(:message)
   end
 
-  scalar :timestamp do
-    serialize &Calendar.Strftime.strftime!(&1, "%H:%M:%S")
-  end
-
   object :message do
     field :id, :id
     field :text, :string
     field :type, :string
     field :person, :person
-    field :created_at, :timestamp
+    field :created_at, :string
   end
 
   object :person do

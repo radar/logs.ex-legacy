@@ -14,7 +14,7 @@ defmodule Logs.Message do
   end
 
   def by_channel_and_date(channel_id, date) do
-    {:ok, time} = Time.new(0, 0, 0)
+    time = ~T[00:00:00]
     {:ok, until} = date |> Calendar.Date.advance!(1) |> NaiveDateTime.new(time)
     {:ok, from} = NaiveDateTime.new(date, time)
 

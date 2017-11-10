@@ -13,6 +13,16 @@ defmodule Logs.Message do
     field :created_at, :naive_datetime
   end
 
+  def by_person(person) do
+    Message
+      |> where(person_id: ^person.id)
+      |> where(hidden: false)
+  end
+
+  def descending(query) do
+    query |> order_by(desc: :created_at)
+  end
+
   def by_channel_and_date(channel_id, date) do
     time = ~T[00:00:00]
     {:ok, until} = date |> Calendar.Date.advance!(1) |> NaiveDateTime.new(time)

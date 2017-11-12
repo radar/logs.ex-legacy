@@ -5,12 +5,12 @@ defmodule Logs.MessageResolver do
     {:ok, Message.by_channel_and_date(channel.id, Date.from_iso8601!(date)) }
   end
 
-  def by_person(%{nick: nick}, _info) do
+  def by_person(%{nick: nick, page: page}) do
     messages = Repo.get_by(Person, nick: nick)
     |> Message.by_person
     |> Message.descending
-    |> Repo.paginate(page: 1, page_size: 250)
+    |> Repo.paginate(page: page, page_size: 250)
 
-    {:ok, messages.entries}
+    messages.entries
   end
 end

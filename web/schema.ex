@@ -25,11 +25,5 @@ defmodule Logs.Schema do
       arg :date, non_null(:string)
       resolve &Logs.MessageResolver.by_channel/2
     end
-
-    field :person_messages, list_of(:message) do
-      arg :nick, non_null(:string)
-      arg :page, non_null(:integer)
-      resolve &Logs.MessageResolver.by_person/2
-    end
   end
 end

@@ -41,8 +41,8 @@ defmodule Logs.Mixfile do
      {:absinthe, "~> 1.3.0"},
      {:absinthe_plug, "~> 1.3.0"},
      {:absinthe_relay, "~> 1.3.0"},
-     {:distillery, "~> 0.10"},
-     {:edeliver, "~> 1.4.0"},
+     {:distillery, "~> 1.5.2"},
+     {:edeliver, "~> 1.4.4"},
    ]
   end
 end

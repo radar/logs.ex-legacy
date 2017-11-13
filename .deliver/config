@@ -9,7 +9,7 @@ BUILD_AT="/tmp/edeliver/myapp/builds"
 PRODUCTION_HOSTS="ryanbigg.com"
 PRODUCTION_USER="ryanbigg"
 
-DELIVER_TO="/var"
+DELIVER_TO="/var/www/logs"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {

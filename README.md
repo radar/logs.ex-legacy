@@ -3,6 +3,6 @@
 App is deployed using edeliver:
 
 ```
-mix edeliver deploy release
+mix edeliver deploy release production
 ```
 

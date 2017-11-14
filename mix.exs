@@ -38,9 +38,10 @@ defmodule Logs.Mixfile do
      {:scrivener, "~> 2.1.1"},
      {:scrivener_ecto, "~> 1.1.3"},
      {:calendar, "~> 0.17.2"},
-     {:absinthe, "~> 1.3.0"},
-     {:absinthe_plug, "~> 1.3.0"},
-     {:absinthe_relay, "~> 1.3.0"},
+     {:absinthe, "~> 1.4.0"},
+     {:absinthe_plug, "~> 1.4.0"},
+     {:absinthe_relay, "~> 1.4.0"},
+     {:dataloader, "~> 1.0"},
      {:distillery, "~> 1.5.2"},
      {:edeliver, "~> 1.4.4"},
    ]

@@ -1,6 +1,6 @@
 defmodule Logs.Schema do
   use Absinthe.Schema
-  use Absinthe.Relay.Schema
+  use Absinthe.Relay.Schema, :modern
 
   import_types Logs.Schema.Types
 
@@ -20,10 +20,9 @@ defmodule Logs.Schema do
       resolve &Logs.PersonResolver.by_nick/2
     end
 
-    field :messages, list_of(:message) do
-      arg :name, non_null(:string)
-      arg :date, non_null(:string)
-      resolve &Logs.MessageResolver.by_channel/2
+    connection field :by_person, node_type: :message do
+      arg :person, non_null(:string)
+      resolve &Logs.MessageResolver.by_person/2
     end
   end
 end

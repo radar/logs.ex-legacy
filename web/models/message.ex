@@ -33,9 +33,5 @@ defmodule Logs.Message do
         m.created_at >= ^from and
         m.created_at <  ^until,
       order_by: m.created_at
-
-    query
-      |> Repo.all
-      |> Repo.preload(:person)
   end
 end

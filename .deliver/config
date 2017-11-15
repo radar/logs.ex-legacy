@@ -1,15 +1,15 @@
 # .deliver/config
 
-APP="myapp"
+APP="logs"
 
 BUILD_HOST="ryanbigg.com"
 BUILD_USER="ryanbigg"
-BUILD_AT="/tmp/edeliver/myapp/builds"
+BUILD_AT="/tmp/edeliver/logs/builds"
 
 PRODUCTION_HOSTS="ryanbigg.com"
 PRODUCTION_USER="ryanbigg"
 
-DELIVER_TO="/var/www/logs"
+DELIVER_TO="/var/www"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {

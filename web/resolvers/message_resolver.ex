@@ -1,10 +1,6 @@
 defmodule Logs.MessageResolver do
   alias Logs.{Message, Repo}
 
-  def by_channel(channel, %{date: date}, _info) do
-    {:ok, Message.by_channel_and_date(channel.id, Date.from_iso8601!(date))}
-  end
-
   def paginated(person, pagination_args, _info) do
     person
     |> Message.by_person

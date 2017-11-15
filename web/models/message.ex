@@ -1,6 +1,5 @@
 defmodule Logs.Message do
   alias Logs.Message
-  alias Logs.Repo
   import Ecto.Query
   use Ecto.Schema
 
@@ -23,19 +22,17 @@ defmodule Logs.Message do
     query |> order_by(desc: :created_at)
   end
 
-  def by_channel_and_date(channel_id, date) do
+  def by_date(query, date) do
     time = ~T[00:00:00]
     {:ok, until} = date |> Calendar.Date.advance!(1) |> NaiveDateTime.new(time)
     {:ok, from} = NaiveDateTime.new(date, time)
 
-    query = from m in Message,
-      where: m.channel_id == ^channel_id and
-        m.created_at >= ^from and
-        m.created_at <  ^until,
+    from m in query,
+      where: m.created_at >= ^from and m.created_at <  ^until,
       order_by: m.created_at
+  end
 
-    query
-      |> Repo.all
-      |> Repo.preload(:person)
+  def by_channel(query, channel_id) do
+    from m in query, where: m.channel_id == ^channel_id
   end
 end

@@ -1,12 +1,17 @@
 defmodule Logs.Schema.Types do
   use Absinthe.Schema.Notation
   use Absinthe.Relay.Schema.Notation, :modern
+  import Absinthe.Resolution.Helpers
+
+  scalar :date do
+    parse &Date.from_iso8601(&1.value)
+  end
 
   object :channel do
     field :name, :string
     field :messages, list_of(:message) do
-      arg :date, non_null(:string)
-      resolve &Logs.MessageResolver.by_channel/3
+      arg :date, non_null(:date)
+      resolve dataloader(Logs, :messages, use_parent: true)
     end
   end
 
@@ -14,7 +19,7 @@ defmodule Logs.Schema.Types do
     field :id, :id
     field :text, :string
     field :type, :string
-    field :person, :person
+    field :person, :person, resolve: dataloader(Logs)
     field :created_at, :string
   end
 

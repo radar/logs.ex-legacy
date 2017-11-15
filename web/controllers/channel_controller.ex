@@ -20,7 +20,8 @@ defmodule Logs.ChannelController do
   end
 
   defp show_messages(conn, channel, date) do
-    messages = Message.by_channel(channel.id)
+    messages = channel.id
+    |> Message.by_channel
     |> Message.by_date(date)
 
     render conn, "show.html", channel: channel, messages: messages, date: date

@@ -11,7 +11,7 @@ defmodule Logs.Schema.Types do
     field :name, :string
     field :messages, list_of(:message) do
       arg :date, non_null(:date)
-      resolve dataloader(Logs, :messages, use_parent: true)
+      resolve dataloader(Logs, :messages)
     end
   end
 

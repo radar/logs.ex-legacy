@@ -1,18 +1,6 @@
 defmodule Logs.Schema do
   use Absinthe.Schema
-  use Absinthe.Relay.Schema
-
-  def context(ctx) do
-    loader =
-      Dataloader.new
-      |> Dataloader.add_source(Logs, Logs.data())
-
-    Map.put(ctx, :loader, loader)
-  end
-
-  def plugins do
-    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
-  end
+  use Absinthe.Relay.Schema, :modern
 
   import_types Logs.Schema.Types
 

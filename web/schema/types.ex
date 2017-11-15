@@ -4,7 +4,10 @@ defmodule Logs.Schema.Types do
 
   object :channel do
     field :name, :string
-    field :messages, list_of(:message)
+    field :messages, list_of(:message) do
+      arg :date, non_null(:string)
+      resolve &Logs.MessageResolver.by_channel/3
+    end
   end
 
   object :message do

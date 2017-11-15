@@ -16,7 +16,7 @@ defmodule Logs.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [mod: {Logs, []},
+    [mod: {Logs.Application, []},
       extra_applications: [:logger]]
   end
 

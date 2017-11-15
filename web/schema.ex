@@ -2,6 +2,18 @@ defmodule Logs.Schema do
   use Absinthe.Schema
   use Absinthe.Relay.Schema
 
+  def context(ctx) do
+    loader =
+      Dataloader.new
+      |> Dataloader.add_source(Logs, Logs.data())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
+  end
+
   import_types Logs.Schema.Types
 
 
@@ -18,12 +30,6 @@ defmodule Logs.Schema do
     field :person, type: :person do
       arg :nick, non_null(:string)
       resolve &Logs.PersonResolver.by_nick/2
-    end
-
-    field :messages, list_of(:message) do
-      arg :name, non_null(:string)
-      arg :date, non_null(:string)
-      resolve &Logs.MessageResolver.by_channel/2
     end
   end
 end

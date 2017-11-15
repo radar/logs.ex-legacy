@@ -1,6 +1,6 @@
 defmodule Logs.Schema.Types do
   use Absinthe.Schema.Notation
-  use Absinthe.Relay.Schema.Notation
+  use Absinthe.Relay.Schema.Notation, :modern
 
   object :channel do
     field :name, :string
@@ -17,18 +17,9 @@ defmodule Logs.Schema.Types do
 
   object :person do
     field :nick, :string
-      connection field :messages, node_type: :message do
-        resolve fn
-          pagination_args, %{source: person} ->
-            Logs.Message.by_person(person)
-            |> Logs.Message.descending
-            |> Absinthe.Relay.Connection.from_query(
-                 &Logs.Repo.all/1,
-                 pagination_args
-            )
-
-        end
-      end
+    connection field :messages, node_type: :message do
+      resolve &Logs.MessageResolver.paginated/3
+    end
   end
 
   connection node_type: :message

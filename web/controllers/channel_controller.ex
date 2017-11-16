@@ -26,6 +26,7 @@ defmodule Logs.ChannelController do
     |> Message.by_channel(channel.id)
     |> Message.by_date(date)
     |> Repo.all
+    |> Repo.preload(:person)
 
     render conn, "show.html", channel: channel, messages: messages, date: date
   end

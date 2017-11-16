@@ -3,6 +3,7 @@ defmodule Logs.ChannelController do
 
   alias Logs.Channel
   alias Logs.Message
+  alias Logs.Repo
 
   def index(conn, _params) do
     render conn, "index.html", channels: Channel.visible_channels
@@ -20,9 +21,11 @@ defmodule Logs.ChannelController do
   end
 
   defp show_messages(conn, channel, date) do
-    messages = channel.id
-    |> Message.by_channel
+    messages =
+    Message
+    |> Message.by_channel(channel.id)
     |> Message.by_date(date)
+    |> Repo.all
 
     render conn, "show.html", channel: channel, messages: messages, date: date
   end
